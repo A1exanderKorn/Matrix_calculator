@@ -3,25 +3,64 @@ import numpy as np
 def matrix_addition(matrix1, matrix2):
     if type(matrix1) is not list or type(matrix1) is not list:
         raise TypeError("wrong type")
-    return np.add(matrix1, matrix2)
+    matrix_1 = np.array(matrix1)
+    matrix_2 = np.array(matrix2)
+    return np.add(matrix_1, matrix_2)
 
 def matrix_subtraction(matrix1, matrix2):
-    return np.subtract(matrix1, matrix2)
+    if type(matrix1) is not list or type(matrix1) is not list:
+        raise TypeError("wrong type")
+    matrix_1 = np.array(matrix1)
+    matrix_2 = np.array(matrix2)
+    return np.subtract(matrix_1, matrix_2)
 
 def matrix_multiplication(matrix1, matrix2):
-    return np.matmul(matrix1, matrix2)
+    if type(matrix1) is not list or type(matrix1) is not list:
+        raise TypeError("wrong type")
+    matrix_1 = np.array(matrix1)
+    matrix_2 = np.array(matrix2)
+    return np.matmul(matrix_1, matrix_2)
 
 def matrix_transpose(matrix):
-    return np.transpose(matrix)
+    if type(matrix) is not list:
+        raise TypeError("wrong type")
+    matrix_1 = np.array(matrix)
+    return np.array(np.transpose(matrix_1))
 
 def matrix_inverse(matrix):
-    return np.linalg.inv(matrix)
+    if type(matrix) is not list:
+        raise TypeError("wrong type")
+    matrix_1 = np.array(matrix)
+    return np.linalg.inv(matrix_1).astype(int)
 
-def matrix_squared(matrix1):
-    return np.matmul(matrix1, matrix1)
+def matrix_squared(matrix):
+    if type(matrix) is not list:
+        raise TypeError("wrong type")
+    matrix_1 = np.array(matrix)
 
+    return np.matmul(matrix_1, matrix_1)
 
+def matrix_pow(matrix1, pow):
+    if type(matrix1) is not list or type(pow) is not int:
+        raise TypeError("wrong type")
+    matrix_1 = np.array(matrix1)
+    result = matrix_1
+    for i in range(1, pow):
+        result = np.matmul(result, matrix_1)
+    return result
 
+def create_sparse_matrix(matrix):
+    sparse_matrix = []
+    if type(matrix) is not list:
+        raise TypeError("wrong type")
+    for i in range(len(matrix)):
+        for j in range(len(matrix[i])):
+            if matrix[i][j] != 0:
+                sparse_matrix.append([i, j, matrix[i][j]])
+    
+    return np.array(sparse_matrix)
+
+# print(create_sparse_matrix([[1, 2], [3, 4]]))
 # if __name__ == '__main__':
 #     matrix1 = []
 #     matrix2 = []
